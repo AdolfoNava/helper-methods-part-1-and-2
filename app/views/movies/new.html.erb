@@ -4,15 +4,35 @@
   <p style="color: red;"><%= message %></p>
 <% end %>
 
-<form action="/movies" method="post" data-turbo="false">
+<%=form_with(url: movies_path(@the_movie), data: {turbo: false}) do%>
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+  <div>
+    <%=label_tag :title %>
+
+    <%=text_field_tag "movie[title]", @the_movie.title %>
+  </div>
+
+  <div>
+    <%=label_tag :description %>
+
+    <%=text_area_tag "movie[description]", @the_movie.description, {rows: 3}%>
+  </div>
+
+  <%= button_tag "Create Movie"%>
+
+<% end %>
+<hr>
+
+<!--<form action="<%#=movies_path%>" method="post" data-turbo="false">
+  <input name="authenticity_token" value="<%#= form_authenticity_token %>" type="hidden">
 
   <div>
     <label for="title_box">
       Title
     </label>
 
-    <input type="text" id="title_box" name="query_title" value="<%= @the_movie.title %>">
+    <input type="text" id="title_box" name="query_title" value="<%#= @the_movie.title %>">
   </div>
 
   <div>
@@ -20,10 +40,11 @@
       Description
     </label>
 
-    <textarea id="description_box" name="query_description" rows="3"><%= @the_movie.description %></textarea>
+    <textarea id="description_box" name="query_description" rows="3"><%#= @the_movie.description %></textarea>
   </div>
 
   <button>
     Create Movie
   </button>
 </form>
+-->
